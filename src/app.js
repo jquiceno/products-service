@@ -4,6 +4,7 @@ require('dotenv').config()
 const server = require('./server')
 const Db = require('./lib/Db')
 const controllers = require('./controllers')
+const middlewares = require('./middlewares')
 const { makeRoutes, errorHandler } = require('./helpers')
 
 const { PORT = 3000 } = process.env
@@ -13,7 +14,7 @@ async function main () {
     await Db.connect()
     console.log('DB Connected!')
 
-    makeRoutes(server, controllers)
+    makeRoutes({ server, controllers, middlewares })
     console.log('Routes created')
 
     server.use(errorHandler)

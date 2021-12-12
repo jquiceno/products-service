@@ -15,6 +15,7 @@ module.exports = [
     name: 'addNewProduct',
     method: 'POST',
     path: '/',
+    middlewares: ['authorization'],
     async handler ({ params }) {
       return await Produc.add(params)
     }
@@ -43,6 +44,7 @@ module.exports = [
     name: 'deleteProductById',
     method: 'DELETE',
     path: '/:id',
+    middlewares: ['authorization'],
     async handler ({ params }) {
       const { id } = params
       const product = new Produc(id)

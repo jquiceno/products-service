@@ -8,14 +8,22 @@ function errorHandler (error, req, res, next) {
   return res.status(output.statusCode).json(output.payload)
 }
 
-function makeRoutes (server, controllers) {
-  controllers.forEach(({ method, path, handler }) => {
+function makeRoutes ({ server, controllers, middlewares = [] } = {}) {
+  controllers.forEach(({ method, path, handler, middlewares: mdwConroller }) => {
     if (!method || !path || !handler) return
     if (!server[method.toLocaleLowerCase()]) return
 
+    const routeMiddlewares = []
+
     method = method.toLocaleLowerCase()
 
-    server[method](path, async (req, res, next) => {
+    if (mdwConroller) {
+      mdwConroller.forEach(mdw => {
+        routeMiddlewares.push(middlewares[mdw])
+      })
+    }
+
+    server[method](path, routeMiddlewares, async (req, res, next) => {
       try {
         const params = {
           ...req.query,
