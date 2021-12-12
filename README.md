@@ -12,6 +12,10 @@ Development
 ```
 npm run dev
 ```
+Docker compose
+```
+docker-compose up
+```
 
 ## Env vars
 
