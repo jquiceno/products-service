@@ -7,10 +7,11 @@ const controllers = require('./controllers')
 const middlewares = require('./middlewares')
 const { makeRoutes, errorHandler } = require('./helpers')
 
-const { PORT = 3000 } = process.env
+const { PORT = 3000, MONGO_URI } = process.env
 
 async function main () {
   try {
+    if (!MONGO_URI) throw new Error('MONGO_URI is required')
     await Db.connect()
     console.log('DB Connected!')
 
@@ -24,6 +25,7 @@ async function main () {
     })
   } catch (error) {
     console.error(`There is an error starting app: ${error}`)
+    Db.connected && await Db.close()
     process.exit(0)
   }
 }
