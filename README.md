@@ -42,3 +42,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzIiwicm9sZ
 ```
 $ npm run create-token 
 ```
+
+## TODO
+ 
+- Create unit tests using Jest
+- Create integration tests using Jest an super test using Jest
+- Add pagination and limits to request `/` 
+- Crear filters to sort products
