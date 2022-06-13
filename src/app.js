@@ -11,8 +11,7 @@ const { PORT = 3000, MONGO_URI } = process.env
 
 async function main () {
   try {
-    if (!MONGO_URI) throw new Error('MONGO_URI is required')
-    await Db.connect()
+    await Db.connect(MONGO_URI)
     console.log('DB Connected!')
 
     makeRoutes({ server, controllers, middlewares })

@@ -43,7 +43,7 @@ class Db {
     }
   }
 
-  async get ({ required = false, object = true, select = false } = {}) {
+  async get ({ required = true, object = true, select = false } = {}) {
     try {
       const req = this.model.findOne(this.query)
 

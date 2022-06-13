@@ -13,7 +13,6 @@ function authorization ({ headers }, res, next) {
   jwt.verify(token)
 
   const tokenData = jwt.verify(token)
-  // await this.broker.call('auth.getTokenData', { token })
 
   if (!tokenData.isValid) throw unauthorized('Invalid Access token')
 
